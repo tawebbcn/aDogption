@@ -2,7 +2,7 @@
 Dogs for people looking for dogs and home for dogs looking for a home
 
 
-##ROUTES:
+## ROUTES:
 
 / - The homepage
 GET => /auth/login => POST
@@ -15,7 +15,7 @@ GET => mydogs/add => POST
 
 * GET => /preferences => POST
 
-##MODELS
+## MODELS
 
 dogs {
   name: {
@@ -79,7 +79,7 @@ users {
       }
 }
 
-##USER STORIES (TO BE CONTINUED):
+## USER STORIES (TO BE CONTINUED):
   
 - As a user I want to see a nice 404 page when I go to a page that doesn’t exist
 - As a user I want to see a nice error page when the super team screws it up
