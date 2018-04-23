@@ -2,7 +2,7 @@
 
 const express = require('express');
 const bcrypt = require('bcrypt');
-const User = require('../models/users');
+const User = require('../models/users-model');
 
 const bcryptSalt = 10;
 
@@ -59,7 +59,7 @@ router.post('/signup', (req, res, next) => {
       user.save()
         .then((result) => {
           req.session.user = result;
-          const redirectTo = req.session.user.role === 'shelter' ? '/mydogs' : '/dogs';
+          const redirectTo = req.session.user.role === 'shelter' ? '/mydogs/add_dog' : '/dogs';
           res.redirect(redirectTo);
         });
     })

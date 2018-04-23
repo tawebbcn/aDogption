@@ -5,12 +5,10 @@ const router = express.Router();
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-  if (req.session.role === 'shelter') {
-    res.redirect('/mydogs');
+  if (req.session.user) {
+    const redirectTo = req.session.user.role === 'shelter' ? '/mydogs' : '/dogs';
+    res.redirect(redirectTo);
     return;
-  }
-  if (req.session.role === 'owner') {
-    res.redirect('/dogs');
   }
   res.render('index');
 });
