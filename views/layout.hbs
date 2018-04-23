@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-  
-  </html>
   <head>
     <title>Dog House</title>
     <meta charset="utf-8">
@@ -13,21 +11,12 @@
       <div class="container">
         <h1 class="logo">Dog House</h1>
         <nav id="main-nav">
-          <ul>
-            <li>
-              <a href="#">Home</a>
-            </li>
-            <!--
-              -->
-            <li>
-              <a href="#" disabled>Pricing</a>
-            </li>
-            <!--
-              -->
-            <li>
-              <a href="#">About</a>
-            </li>
-          </ul>
+          {{#if user}}
+          <form class="logout-button" method="POST" action="/auth/logout">
+            <p>{{user.username}}</p>
+            <button>Log out</button>
+          </form>
+          {{/if}}
         </nav>
       </div>
     </header>

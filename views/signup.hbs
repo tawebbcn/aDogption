@@ -9,6 +9,11 @@
   </div>
 
   <div class="field">
+    <label>username</label>
+    <input type="text" name="username" />
+  </div>
+
+  <div class="field">
     <label>password</label>
     <input type="password" name="password" />
   </div>
@@ -24,9 +29,15 @@
     <input type="radio" name="role" value="shelter"/>
   </div>
 
+  
+    <input type="checkbox">I accept the
+    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Terms and Conditions</a>
+    </input>
+
   <div class="field submit">
     <button type="submit">Save</button>
   </div>
+  
 </form>
 {{#each errorMessage}}
 {{this}}

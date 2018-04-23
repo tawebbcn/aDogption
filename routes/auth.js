@@ -10,12 +10,9 @@ const router = express.Router();
 
 // ----------------GET sign up page------------//
 router.get('/signup', (req, res, next) => {
-  if (req.session.role === 'shelter') {
-    res.redirect('/mydogs');
-    return;
-  }
-  if (req.session.role === 'owner') {
-    res.redirect('/dogs');
+  if (req.session.user) {
+    const redirectTo = req.session.user.role === 'shelter' ? '/mydogs' : '/dogs';
+    res.redirect(redirectTo);
     return;
   }
   const data = {
@@ -26,39 +23,45 @@ router.get('/signup', (req, res, next) => {
 
 // ----------------POST sign up page------------//
 router.post('/signup', (req, res, next) => {
+  if (req.session.user) {
+    const redirectTo = req.session.user.role === 'shelter' ? '/mydogs' : '/dogs';
+    res.redirect(redirectTo);
+    return;
+  }
+
   const email = req.body.email;
+  const username = req.body.username;
   const password = req.body.password;
   const role = req.body.role;
-  if (!email || !password) {
+  if (!email || !password || !username) {
+    req.flash('signup-error', 'Please fill in all the fields.');
     res.redirect('/auth/signup');
   }
 
   User.findOne({'email': email})
     .then((result) => {
-      if (!result) {
-        const salt = bcrypt.genSaltSync(bcryptSalt);
-        const hashPass = bcrypt.hashSync(password, salt);
-
-        const user = new User({
-          email,
-          password: hashPass,
-          role
-        });
-
-        user.save()
-          .then((result) => {
-            req.session.user = true;
-            req.session.role = result.role;
-            if (role === 'shelter') {
-              res.redirect('/mydogs/add_dog');
-            } else {
-              res.redirect('/dogs');
-            }
-          });
+      if (result) {
+        req.flash('signup-error', 'This email is taken. Try logging in');
+        res.redirect('/auth/signup');
         return;
       }
-      req.flash('signup-error', 'This email is taken. Try logging in');
-      res.redirect('/auth/signup');
+
+      const salt = bcrypt.genSaltSync(bcryptSalt);
+      const hashPass = bcrypt.hashSync(password, salt);
+
+      const user = new User({
+        email,
+        username,
+        password: hashPass,
+        role
+      });
+
+      user.save()
+        .then((result) => {
+          req.session.user = result;
+          const redirectTo = req.session.user.role === 'shelter' ? '/mydogs' : '/dogs';
+          res.redirect(redirectTo);
+        });
     })
     .catch(next);
 });
@@ -66,14 +69,12 @@ router.post('/signup', (req, res, next) => {
 // ----------------GET login page------------//
 
 router.get('/login', (req, res, next) => {
-  if (req.session.role === 'shelter') {
-    res.redirect('/mydogs');
+  if (req.session.user) {
+    const redirectTo = req.session.user.role === 'shelter' ? '/mydogs' : '/dogs';
+    res.redirect(redirectTo);
     return;
   }
-  if (req.session.role === 'owner') {
-    res.redirect('/dogs');
-    return;
-  }
+
   const data = {
     errorMessage: req.flash('login-error')
   };
@@ -83,6 +84,12 @@ router.get('/login', (req, res, next) => {
 // ----------------POST login page------------//
 
 router.post('/login', (req, res, next) => {
+  if (req.session.user) {
+    const redirectTo = req.session.user.role === 'shelter' ? '/mydogs' : '/dogs';
+    res.redirect(redirectTo);
+    return;
+  }
+
   const email = req.body.email;
   const password = req.body.password;
 
@@ -94,32 +101,27 @@ router.post('/login', (req, res, next) => {
 
   User.findOne({'email': email})
     .then((result) => {
-      if (result) {
-        if (bcrypt.compareSync(password, result.password)) {
-          req.session.user = true;
-          req.session.role = result.role;
-          if (req.session.role === 'shelter') {
-            res.redirect('/mydogs');
-          } else {
-            res.redirect('/dogs');
-          }
-        }
+      if (!result) {
+        req.flash('login-error', 'Wrong username');
+        res.redirect('/auth/login');
+        return;
+      }
+      if (!bcrypt.compareSync(password, result.password)) {
         req.flash('login-error', 'Wrong password');
         res.redirect('/auth/login');
         return;
       }
-      req.flash('login-error', 'Wrong username');
-      res.redirect('/auth/login');
+
+      req.session.user = result;
+      const redirectTo = req.session.user.role === 'shelter' ? '/mydogs' : '/dogs';
+      res.redirect(redirectTo);
     })
     .catch(next);
 });
 
 router.post('/logout', (req, res, next) => {
   if (req.session.user) {
-    req.session.user = false;
-    req.session.role = null;
-    res.redirect('/');
-    return;
+    req.session.user = null;
   }
   res.redirect('/');
 });
