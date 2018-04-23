@@ -6,6 +6,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
+const flash = require('connect-flash');
 
 // --------------------Set up routes--------------//
 
@@ -19,15 +20,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
 mongoose.Promise = Promise;
-mongoose.connect('mongodb://localhost/spots', {
-  keepAlive: true,
-  reconnectTries: Number.MAX_VALUE
-});
-
-// OR when using provess.env to get ready for deploy
-
-mongoose.Promise = Promise;
-mongoose.connect(process.env.MONGODB_URI, {
+mongoose.connect('mongodb://localhost/dog-house', {
   keepAlive: true,
   reconnectTries: Number.MAX_VALUE
 });
@@ -38,6 +31,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(flash());
 
 // ---------------Call the routes------------ //
 

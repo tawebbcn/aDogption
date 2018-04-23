@@ -1,0 +1,34 @@
+<div class="container">
+<h1>Welcome to Dog House</h1>
+
+<form method="POST" action="/auth/signup">
+
+  <div class="field">
+    <label>email</label>
+    <input type="text" name="email" />
+  </div>
+
+  <div class="field">
+    <label>password</label>
+    <input type="password" name="password" />
+  </div>
+
+  <p>Choose your role</p>
+  <div class="field">
+    <label>Owner</label>
+    <input type="radio" name="role" value="owner"/>
+  </div>
+
+  <div class="field">
+    <label>Shelter</label>
+    <input type="radio" name="role" value="shelter"/>
+  </div>
+
+  <div class="field submit">
+    <button type="submit">Save</button>
+  </div>
+</form>
+{{#each errorMessage}}
+{{this}}
+{{/each}}
+</div>
