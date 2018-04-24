@@ -1,0 +1,57 @@
+<div class='container'>
+
+  <h1>Edit Dog</h1>
+
+  <form method="POST" action="/mydogs/{{dogs._id}}/edit_dog">
+
+    <div class="field">
+      <label>Name</label>
+      <input type="text" name="name" value="{{dogs.name}}">
+    </div>
+
+    <div class="field">
+      <label>Type</label>
+      <select name="breed_type">
+
+        <option value="retriever">Retriever</option>
+        <option value="pastor">Pastor</option>
+        <option value="guard">Guard</option>
+        <option value="sled">Sled</option>
+        <option value="working">Working</option>
+        <option value="companion">Companion</option>
+        <option value="bulldog">Bulldog</option>
+        <option value="pitbull">Pitbull</option>
+        <option value="terrier">Terrier</option>
+        <option value="hound">Hound</option>
+        <option value="pointer">Pointer</option>
+        <option value="setter">Setter</option>
+        <option value="collie">Collie</option>
+        <option value="shepherd">Shepherd</option>
+        <option value="huskie">Huskie</option>
+        <option value="not-defined">Not Defined</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Age</label>
+      <select name="age">
+        <option value="puppy">Puppy</option>
+        <option value="adult">Adult</option>
+        <option value="senior">Senior</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>City</label>
+      <input type="text" name="city" />
+    </div>
+
+    <div class="field">
+      <label>Tell Us About Your Dog</label>
+      <textarea name="description" cols="30" rows="10"></textarea>
+    </div>
+
+    <div class="field submit">
+      <button type="submit">Save</button>
+    </div>
+  </form>
+
+</div>

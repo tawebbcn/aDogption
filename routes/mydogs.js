@@ -56,7 +56,18 @@ router.get('/:id', (req, res, next) => {
     .catch(next);
 });
 
-router.post('/:id/delete', (req, res, next) => {
+router.get('/:id/edit_dog', (req, res, next) => {
+  const dogId = req.params.id;
+  Dog.findById(dogId)
+    .then((result) => {
+      const data = {
+        dogs: result
+      };
+      res.render('edit_dog', data);
+    });
+});
+
+router.get('/:id/delete', (req, res, next) => {
   const dogId = req.params.id;
   Dog.findByIdAndRemove(dogId)
     .then((result) => {
