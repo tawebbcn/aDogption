@@ -20,6 +20,10 @@ const dogSchema = new Schema({
     enum: ['retriever', 'pastor', 'guard', 'sled', 'working', 'companion', 'bulldog', 'pitbull', 'terrier', 'hound', 'pointer', 'setter', 'collie', 'shepherd', 'huskie', 'not-defined'],
     default: 'retriever'
   },
+  description: {
+    type: String,
+    required: false
+  },
   owner: {
     type: ObjectId,
     ref: User
