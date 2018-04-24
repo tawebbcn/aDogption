@@ -1,0 +1,11 @@
+<h1>{{dogs.name}}</h1>
+<h2>{{dogs.breed_type}}</h2>
+<h2>{{dogs.age}}</h2>
+<h2>{{dogs.city}}</h2>
+<h4>{{dogs.description}}</h4>
+
+<form method="POST" action="/mydogs/{{dogs.id}}/delete">
+  <div class="field submit">
+    <button type="submit">Remove</button>
+  </div>
+</form>
