@@ -7,12 +7,17 @@
     <p>{{dogs.description}}</p>
   </div>
 
-  <a class="btn" href="/mydogs/{{dogs.id}}/edit_dog/">Edit</a>
 
+  {{#if shelter}}
   <form method="POST" action="/mydogs/{{dogs.id}}/delete">
     <div class="field submit">
       <button class="btn" type="submit">Remove</button>
     </div>
   </form>
+  <a class="btn" href="/mydogs/{{dogs.id}}/edit_dog/">Edit</a>
+  {{/if}}
+  
+  {{#unless shelter}}
+  <a href="/dogs/{{dogs.id}}/request">Send a request</a>
+  {{/unless}}
 </div>
-

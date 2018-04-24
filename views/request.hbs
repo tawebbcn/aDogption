@@ -1,0 +1,27 @@
+<div class='container'>
+
+    <h1>Send a request</h1>
+
+    <form method="POST" action="./request">
+
+        <div class="field">
+            <label>Name</label>
+            <input type="text" name="name" value="{{user.username}}" />
+        </div>
+
+        <div class="field">
+            <label>City</label>
+            <input type="text" name="city" />
+        </div>
+
+        <div class="field">
+            <label>Send a nice message to the shelter</label>
+            <textarea name="message" cols="30" rows="10"></textarea>
+        </div>
+
+        <div class="field submit">
+            <button type="submit">Save</button>
+        </div>
+    </form>
+
+</div>

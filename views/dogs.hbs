@@ -1,0 +1,12 @@
+<div class="container">
+
+    {{#each dogs}}
+    <div>
+        <h1>{{this.name}}</h1>
+        <h4>{{this.breed_type}}</h4>
+        <h4>{{this.age}}</h4>  
+        <button><a href="/dogs/{{this.id}}">See more details</a></button>
+    </div>
+    {{/each}}
+
+</div>
