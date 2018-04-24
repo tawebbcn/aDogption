@@ -14,6 +14,7 @@ const MongoStore = require('connect-mongo')(session);
 
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
+const myDogsRouter = require('./routes/mydogs');
 
 const app = express();
 
@@ -58,6 +59,7 @@ app.use(flash());
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
+app.use('/mydogs', myDogsRouter);
 
 // ---------------Catch 404 and forward to error handler------------ //
 

@@ -11,12 +11,13 @@ const dogSchema = new Schema({
     required: true
   },
   age: {
-    type: Number,
+    type: String,
+    enum: ['puppy', 'adult', 'senior'],
     required: true
   },
   breed_type: {
     type: String,
-    enum: ['retriever', 'hunting', 'pastor', 'guard', 'sled', 'working', 'companion', ''],
+    enum: ['retriever', 'pastor', 'guard', 'sled', 'working', 'companion', 'bulldog', 'pitbull', 'terrier', 'hound', 'pointer', 'setter', 'collie', 'shepherd', 'huskie', 'not-defined'],
     default: 'retriever'
   },
   owner: {

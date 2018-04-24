@@ -1,0 +1,53 @@
+<div class='container'>
+  
+<h1>Add Dog</h1>
+
+<form method="POST" action="/mydogs/add_dog">
+
+  <div class="field">
+    <label>Name</label>
+    <input type="text" name="name" />
+  </div>
+
+  <div class="field">
+    <label>Type</label>
+    <select name="type">
+      {{!-- {{#each type}} --}}
+      <option value="retriever">retriever</option>
+      <option value="pastor">pastor</option>
+      <option value="guard">guard</option>
+      <option value="sled">sled</option>
+      <option value="working">working</option>
+      <option value="companion">companion</option>
+      <option value="bulldog">bulldog</option>
+      <option value="pitbull">pitbull</option>
+      <option value="terrier">terrier</option>
+      <option value="hound">hound</option>
+      <option value="pointer">pointer</option>
+      <option value="setter">setter</option>
+      <option value="collie">collie</option>
+      <option value="shepherd">shepherd</option>
+      <option value="huskie">huskie</option>
+      <option value="not-defined">not-defined</option>
+    </select>
+  </div>
+  <div class="field">
+    <label>Age</label>
+    <select name="age">
+      <option value="puppy">Puppy</option>
+      <option value="adult">Adult</option>
+      <option value="senior">Senior</option>
+    </select>
+    </div>
+  <div class="field">
+    <label>City</label>
+    <input type="text" name="city" />
+  </div>
+
+  <div class="field submit">
+    <button type="submit">Save</button>
+  </div>
+</form>
+
+</div>
+
