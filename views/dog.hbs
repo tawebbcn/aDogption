@@ -1,11 +1,14 @@
-<h1>{{dogs.name}}</h1>
-<h2>{{dogs.breed_type}}</h2>
-<h2>{{dogs.age}}</h2>
-<h2>{{dogs.city}}</h2>
-<h4>{{dogs.description}}</h4>
-
-<form method="POST" action="/mydogs/{{dogs.id}}/delete">
-  <div class="field submit">
-    <button type="submit">Remove</button>
+<div class="container">
+  <div class="dog-card">
+    <h3>{{dogs.name}}</h3>
+    <h4>{{dogs.breed_type}}</h4>
+    <h4>{{dogs.age}}</h4>
+    <h4>{{dogs.city}}</h4>
+    <p>{{dogs.description}}</p>
   </div>
-</form>
+  <form method="POST" action="/mydogs/{{dogs.id}}/delete">
+    <div class="field submit">
+      <button type="submit">Remove</button>
+    </div>
+  </form>
+</div>
