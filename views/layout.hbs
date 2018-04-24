@@ -11,8 +11,16 @@
       <div class="container">
         <h1 class="logo">Dog House</h1>
         <nav id="main-nav">
+          {{#unless user}}
+          <form method="GET" action="/auth/signup">
+            <button>Sign up</button>
+          </form>
+            <form method="GET" action="/auth/login">
+              <button href="/auth/login">Login</button>
+            </form>
+          {{/unless}}
           {{#if user}}
-          <form class="logout-button" method="POST" action="/auth/logout">
+          <form class="logout-button button-div" method="POST" action="/auth/logout">
             <p>{{user.username}}</p>
             <button>Log out</button>
           </form>

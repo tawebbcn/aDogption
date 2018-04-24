@@ -45,10 +45,28 @@ p {
 
 /* ---- layout ---- */
 
+body {
+  background: #ffc300;
+  color: #fff;
+}
+
 #site-header {
   padding: 30px 0;
-  color: yellow;
-  background: #111;
+  color: #ffc300;
+  background: #fff;
+  background-size: cover;
+}
+
+#site-header form{
+  display: inline-block;
+
+}
+button { 
+  background-color: rgb(240, 100, 100);
+  border-radius: 10px;
+  margin-bottom: 2%;
+  padding: 4px 10px;
+  color: #fff;
 }
 
 .home-image img{
@@ -56,13 +74,15 @@ p {
 }
 
 #site-footer {
-  color: yellow;
-  padding: 60px 0;
-  background: #111;
+  color: #ffc300;
+  background: #fff;
+  background-size: cover;
+  padding: 30px 0;
 }
 
 #site-main {
   margin-bottom: 60px;
+  background 
 }
 
 .container {
@@ -82,6 +102,31 @@ p {
 }
 
 /* ---- components ---- */
+
+a {
+  text-decoration: none;
+  color: #27afdc;
+
+}
+
+.signup,
+.login  {
+  display: inline-block;
+  text-align: center;
+  margin-bottom: 3vh
+}
+
+.signup a,
+.login  a {
+  color: #fff;
+}
+
+.signup button,
+.login  button {
+  padding: 8px 14px;
+  font-size: 16px;
+  background-color: #27afdc;
+}
 
 
 /* ---- site-header ---- */
@@ -176,3 +221,4 @@ form .field.has-error label {
 form .field.has-error input {
 	border: 1px solid  red;
 }
+
