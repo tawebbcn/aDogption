@@ -59,7 +59,7 @@ router.post('/signup', (req, res, next) => {
       user.save()
         .then((result) => {
           req.session.user = result;
-          const redirectTo = req.session.user.role === 'shelter' ? '/mydogs/add_dog' : '/dogs';
+          const redirectTo = req.session.user.role === 'shelter' ? '/mydogs/add-dog' : '/dogs';
           res.redirect(redirectTo);
         });
     })

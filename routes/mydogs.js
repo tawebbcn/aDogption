@@ -22,11 +22,11 @@ router.get('/', (req, res, next) => {
   res.redirect('/dogs');
 });
 
-router.get('/add_dog', (req, res, next) => {
+router.get('/add-dog', (req, res, next) => {
   const user = req.session.user;
 
   if (user.role === 'shelter') {
-    res.render('add_dog');
+    res.render('add-dog');
     return;
   }
   res.redirect('/dogs');
@@ -34,7 +34,7 @@ router.get('/add_dog', (req, res, next) => {
 // })
 ;
 
-router.post('/add_dog', (req, res, next) => {
+router.post('/add-dog', (req, res, next) => {
   const user = req.session.user;
 
   if (user.role === 'shelter') {
@@ -51,11 +51,11 @@ router.post('/add_dog', (req, res, next) => {
   res.redirect('/dogs');
 });
 
-router.get('/:id', (req, res, next) => {
+router.get('/:dogId', (req, res, next) => {
   const user = req.session.user;
 
   if (user.role === 'shelter') {
-    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    if (!mongoose.Types.ObjectId.isValid(req.params.dogId)) {
       res.status(404);
       res.render('not-found');
       return;
@@ -67,7 +67,7 @@ router.get('/:id', (req, res, next) => {
       shelter = true;
     }
 
-    const dogId = req.params.id;
+    const dogId = req.params.dogId;
     Dog.findById(dogId)
       .then((result) => {
         if (!result) {
@@ -75,9 +75,13 @@ router.get('/:id', (req, res, next) => {
           res.render('not-found');
           return;
         }
+
+        const requests = result.requests;
+
         const data = {
           dogs: result,
-          shelter: shelter
+          shelter: shelter,
+          requests: requests
         };
         res.render('dog', data);
       })
@@ -87,8 +91,31 @@ router.get('/:id', (req, res, next) => {
   res.redirect('/dogs;');
 });
 
-router.get('/:id/edit_dog', (req, res, next) => {
-  const dogId = req.params.id;
+router.get('/:dogId/request/:requestId', (req, res, next) => {
+  const dogId = req.params.dogId;
+  const requestId = req.params.requestId;
+
+  const user = req.session.user;
+
+  if (user.role === 'shelter') {
+    Dog.findById(dogId)
+      .then((result) => {
+        const requests = result.requests;
+
+        const data = {
+          dogs: result,
+          requests: requests
+        };
+        res.render('view-request', data);
+      })
+      .catch(next);
+    return;
+  }
+  res.redirect('/dogs');
+});
+
+router.get('/:dogId/edit-dog', (req, res, next) => {
+  const dogId = req.params.dogId;
 
   const user = req.session.user;
 
@@ -98,7 +125,7 @@ router.get('/:id/edit_dog', (req, res, next) => {
         const data = {
           dogs: result
         };
-        res.render('edit_dog', data);
+        res.render('edit-dog', data);
       })
       .catch(next);
     return;
@@ -106,11 +133,11 @@ router.get('/:id/edit_dog', (req, res, next) => {
   res.redirect('/dogs');
 });
 
-router.post('/:id/edit_dog', (req, res, next) => {
+router.post('/:dogId/edit-dog', (req, res, next) => {
   const user = req.session.user;
 
   if (user.role === 'shelter') {
-    const dogId = req.params.id;
+    const dogId = req.params.dogId;
     const dog = {
       name: req.body.name,
       breed_type: req.body.breed_type,
@@ -133,11 +160,11 @@ router.post('/:id/edit_dog', (req, res, next) => {
   res.redirect('/dogs');
 });
 
-router.post('/:id/delete', (req, res, next) => {
+router.post('/:dogId/delete', (req, res, next) => {
   const user = req.session.user;
 
   if (user.role === 'shelter') {
-    const dogId = req.params.id;
+    const dogId = req.params.dogId;
     Dog.findByIdAndRemove(dogId)
       .then((result) => {
         res.redirect('/mydogs');

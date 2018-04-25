@@ -16,13 +16,13 @@ router.get('/', (req, res, next) => {
     .catch(next);
 });
 
-router.get('/:id', (req, res, next) => {
-  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+router.get('/:dogId', (req, res, next) => {
+  if (!mongoose.Types.ObjectId.isValid(req.params.dogId)) {
     res.status(404);
     res.render('not-found');
     return;
   }
-  const dogId = req.params.id;
+  const dogId = req.params.dogId;
   const user = req.session.user;
   const userId = req.session.user._id;
 
@@ -59,13 +59,13 @@ router.get('/:id', (req, res, next) => {
     .catch(next);
 });
 
-router.get('/:id/request', (req, res, next) => {
-  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+router.get('/:dogId/request', (req, res, next) => {
+  if (!mongoose.Types.ObjectId.isValid(req.params.dogId)) {
     res.status(404);
     res.render('not-found');
     return;
   }
-  const dogId = req.params.id;
+  const dogId = req.params.dogId;
   const user = req.session.user;
 
   Dog.findById(dogId)
@@ -84,8 +84,8 @@ router.get('/:id/request', (req, res, next) => {
     .catch(next);
 });
 
-router.post('/:id/request', (req, res, next) => {
-  const dogId = req.params.id;
+router.post('/:dogId/request', (req, res, next) => {
+  const dogId = req.params.dogId;
   const userId = req.session.user._id;
   const message = req.body.message;
   const status = 'pending';
