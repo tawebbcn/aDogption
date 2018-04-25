@@ -11,6 +11,9 @@
       <div class="container">
         <h1 class="logo">Dog House</h1>
         <nav id="main-nav">
+          <form method="GET" action="/">
+            <button>Home</button>
+          </form>
           {{#unless user}}
           <form method="GET" action="/auth/signup">
             <button>Sign up</button>

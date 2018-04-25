@@ -1,3 +1,15 @@
-{{#each dogs}}
-<a href="/mydogs/{{this.id}}">{{this.name}}</a>
-{{/each}}
+<div class="container">
+
+    {{#each dogs}}
+    <div>
+        <h1>{{this.name}}</h1>
+        <h4>{{this.gender}}</h4>
+        <h4>{{this.breed_type}}</h4>
+        <h4>{{this.age}}</h4>
+        <a href="/mydogs/{{this.id}}">See more details</a>
+    </div>
+    {{/each}}
+    
+    <a href="/mydogs/add_dog">Add a Dog</a>
+
+</div>
