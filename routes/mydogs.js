@@ -9,7 +9,7 @@ router.get('/', (req, res, next) => {
   const user = req.session.user;
 
   if (user.role === 'shelter') {
-    Dog.find({})
+    Dog.find({owner: user._id})
       .then((result) => {
         const data = {
           dogs: result
