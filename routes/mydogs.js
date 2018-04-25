@@ -94,13 +94,18 @@ router.get('/:dogId', (req, res, next) => {
 router.get('/:dogId/request/:requestId', (req, res, next) => {
   const dogId = req.params.dogId;
   const requestId = req.params.requestId;
-
+  let requests = null;
   const user = req.session.user;
 
   if (user.role === 'shelter') {
     Dog.findById(dogId)
       .then((result) => {
-        const requests = result.requests;
+        result.requests.find((request) => {
+          if (request.id === requestId) {
+            const index = result.requests.indexOf(request);
+            requests = result.requests[index];
+          };
+        });
 
         const data = {
           dogs: result,
@@ -110,6 +115,30 @@ router.get('/:dogId/request/:requestId', (req, res, next) => {
       })
       .catch(next);
     return;
+  }
+  res.redirect('/dogs');
+});
+
+router.post('/:dogId/request/:requestId/', (req, res, next) => {
+  const dogId = req.params.dogId;
+  const requestId = req.params.requestId;
+  const user = req.session.user;
+
+  if (user.role === 'shelter') {
+    if (req.body.status === 'reject') {
+      Dog.findByIdAndUpdate({dogId, requestId}, {
+        $push: {
+          try: 'kn'
+        }})
+        .then((result) => {
+          res.redirect(`/mydogs/${dogId}`);
+        })
+        .catch(next);
+      return;
+    }
+    if (req.body.status === 'accept') {
+
+    }
   }
   res.redirect('/dogs');
 });
@@ -138,6 +167,7 @@ router.post('/:dogId/edit-dog', (req, res, next) => {
 
   if (user.role === 'shelter') {
     const dogId = req.params.dogId;
+
     const dog = {
       name: req.body.name,
       breed_type: req.body.breed_type,

@@ -1,10 +1,10 @@
-{{this.owner}}
+{{requests.owner}}
 {{requests.message}}
 {{requests.status}}
 
-<form method="POST" action="/mydogs/{{dogs.id}}/request">
+<form method="POST" action="/mydogs/{{dogs.id}}/request/{{requests.id}}">
     <div class="field submit">
-        <button class="btn" type="submit" value="accept">Accept</button>
-        <button class="btn" type="submit" value="reject">Reject</button>
+        <button class="btn" type="submit" name="status" value="accept">Accept</button>
+        <button class="btn" type="submit" name="status" value="reject">Reject</button>
     </div>
 </form>
