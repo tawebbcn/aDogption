@@ -71,20 +71,23 @@ router.get('/:id/request', (req, res, next) => {
     .catch(next);
 });
 
-// router.post('/:id/request', (req, res, next) => {
-//   const dogId = req.params.id;
-//   const userId = req.session.user._id;
-//   const message = req.body.message;
+router.post('/:id/request', (req, res, next) => {
+  const dogId = req.params.id;
+  const userId = req.session.user._id;
+  const message = req.body.message;
+  const status = 'pending';
 
-//   let object = {
-//     owner: userId,
-//     message: message
-//   };
+  let requestInfo = {
+    owner: userId,
+    message: message,
+    status: status
+  };
 
-//   Dog.findOneAndUpdate(dogId)
-//     .then((result) => {
-//       { push: { object: object; } }
-//     });
-// });
+  Dog.findByIdAndUpdate(dogId, {$push: {requests: requestInfo}})
+    .then((result) => {
+      res.redirect(`/dogs/${dogId}`);
+    })
+    .catch(next);
+});
 
 module.exports = router;

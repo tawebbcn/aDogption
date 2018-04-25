@@ -38,9 +38,10 @@ const dogSchema = new Schema({
       type: String,
       required: true
     },
-    accepted: {
-      type: Boolean,
-      required: true
+    status: {
+      type: String,
+      enum: ['pending', 'accepted', 'rejected'],
+      required: false
     }
   }]
 });
