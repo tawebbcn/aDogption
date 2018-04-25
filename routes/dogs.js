@@ -23,6 +23,8 @@ router.get('/:id', (req, res, next) => {
   }
   const dogId = req.params.id;
   const user = req.session.user;
+  const userId = req.session.user._id;
+
   let shelter = false;
 
   if (user.role === 'shelter') {
@@ -36,11 +38,21 @@ router.get('/:id', (req, res, next) => {
         res.render('not-found');
         return;
       }
+
       const data = {
         dogs: result,
         user: user,
-        shelter: shelter
+        shelter: shelter,
+        status: null
       };
+
+      result.requests.find((requests) => {
+        if (requests.owner.toString() === userId) {
+          const index = result.requests.indexOf(requests);
+          data.status = result.requests[index].status.toUpperCase();
+        };
+      });
+
       res.render('dog', data);
     })
     .catch(next);
@@ -76,16 +88,25 @@ router.post('/:id/request', (req, res, next) => {
   const userId = req.session.user._id;
   const message = req.body.message;
   const status = 'pending';
+  const pendingRequest = true;
+  const acceptedRequest = false;
+  const rejectedRequest = false;
 
-  let requestInfo = {
+  const requestInfo = {
     owner: userId,
     message: message,
     status: status
   };
 
+  // const data = {
+  //   pendingRequest: pendingRequest,
+  //   acceptedRequest: acceptedRequest,
+  //   rejectedRequest: rejectedRequest
+  // };
+
   Dog.findByIdAndUpdate(dogId, {$push: {requests: requestInfo}})
     .then((result) => {
-      res.redirect(`/dogs/${dogId}`);
+      res.redirect(`/dogs/${dogId}`, data);
     })
     .catch(next);
 });

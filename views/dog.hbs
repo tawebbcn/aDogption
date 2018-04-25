@@ -17,7 +17,14 @@
   <a class="btn" href="/mydogs/{{dogs.id}}/edit_dog/">Edit</a>
   {{/if}}
   
+
+  {{#if status}}
+  <h3> Your request is {{status}}</h3>
+  {{/if}}
+  {{#unless status}}
   {{#unless shelter}}
   <a href="/dogs/{{dogs.id}}/request">Send a request</a>
   {{/unless}}
+  {{/unless}}
+
 </div>
