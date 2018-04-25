@@ -1,6 +1,8 @@
 'use strict';
 
 // -----------------Requirements------------ //
+require('dotenv').config();
+
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -24,7 +26,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
 mongoose.Promise = Promise;
-mongoose.connect('mongodb://localhost/dog-house', {
+mongoose.connect(process.env.MONGODB_URI, {
   keepAlive: true,
   reconnectTries: Number.MAX_VALUE
 });
