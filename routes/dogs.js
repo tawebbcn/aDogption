@@ -12,7 +12,8 @@ router.get('/', (req, res, next) => {
         dogs: result
       };
       res.render('dogs', data);
-    });
+    })
+    .catch(next);
 });
 
 router.get('/:id', (req, res, next) => {
@@ -88,9 +89,6 @@ router.post('/:id/request', (req, res, next) => {
   const userId = req.session.user._id;
   const message = req.body.message;
   const status = 'pending';
-  const pendingRequest = true;
-  const acceptedRequest = false;
-  const rejectedRequest = false;
 
   const requestInfo = {
     owner: userId,
@@ -98,15 +96,9 @@ router.post('/:id/request', (req, res, next) => {
     status: status
   };
 
-  // const data = {
-  //   pendingRequest: pendingRequest,
-  //   acceptedRequest: acceptedRequest,
-  //   rejectedRequest: rejectedRequest
-  // };
-
   Dog.findByIdAndUpdate(dogId, {$push: {requests: requestInfo}})
     .then((result) => {
-      res.redirect(`/dogs/${dogId}`, data);
+      res.redirect(`/dogs/${dogId}`);
     })
     .catch(next);
 });

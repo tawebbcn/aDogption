@@ -10,6 +10,11 @@ const dogSchema = new Schema({
     type: String,
     required: true
   },
+  gender: {
+    type: String,
+    enum: ['Male', 'Female'],
+    required: true
+  },
   age: {
     type: String,
     enum: ['puppy', 'adult', 'senior'],
