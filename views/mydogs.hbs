@@ -1,15 +1,17 @@
-<div class="container">
+<div class="container flex-parent">
 
     {{#each dogs}}
-    <div>
+    <div class="dog-card">
         <h1>{{this.name}}</h1>
         <h4>{{this.gender}}</h4>
         <h4>{{this.breed_type}}</h4>
         <h4>{{this.age}}</h4>
-        <a href="/mydogs/{{this.id}}">See more details</a>
+        <a href="/mydogs/{{this.id}}" class="button">See more details</a>
     </div>
     {{/each}}
+<div class="add-dog">   
+<a href="/mydogs/add-dog" class="button">Add a Dog</a>
+</div>
     
-    <a href="/mydogs/add-dog">Add a Dog</a>
-
+    
 </div>

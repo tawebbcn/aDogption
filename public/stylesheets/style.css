@@ -65,7 +65,7 @@ button {
   background-color: #27afdc;
   border-radius: 10px;
   margin-bottom: 2%;
-  padding: 4px 10px;
+  padding: 10px 16px;
   color: #fff;
 }
 
@@ -81,7 +81,7 @@ button {
 }
 
 #site-main {
-  margin-bottom: 60px;
+  margin-bottom: 80vh;
 }
 
 .container {
@@ -92,6 +92,34 @@ button {
   margin-bottom: 20px;
   padding-top: 20px;
 }
+/*------------------ /dogs and mydogs style ----------------*/
+.flex-parent {
+  display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   justify-content: space-between;
+   align-content: flex-start;
+   align-items: flex-start;
+}
+
+.dog-card {
+   order: 0;
+   flex: 0 1 auto;
+   align-self: auto;
+   padding-left: 10px;
+   margin-bottom: 20px;
+}
+
+.add-dog {
+  padding-top: 5vh;
+  margin-bottom: 5vh;
+  align-self: baseline;
+}
+
+/*------------------ // ----------------*/
+
+/* ----------------------/:dogId----------------- */
+
 
 @media (min-width: 768px) {
   .container {
@@ -100,14 +128,24 @@ button {
   }
 }
 
+
+
 /* ---- components ---- */
 
 a {
   text-decoration: none;
-  color: #27afdc;
+  color: #27afdc;  
 
 }
 
+a.button {
+  background-color: #27afdc;
+  border-radius: 10px;
+  color: #fff;
+  padding: 10px;
+  margin-bottom: 600px;
+  display: inline-block;
+}
 .signup,
 .login  {
   display: inline-block;

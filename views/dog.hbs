@@ -14,12 +14,13 @@
 
   <form method="POST" action="/mydogs/{{dogs.id}}/delete">
     <div class="field submit">
-      <button class="btn" type="submit">Remove</button>
+      <button class="button" type="submit">Remove</button>
     </div>
   </form>
-  <a class="btn" href="/mydogs/{{dogs.id}}/edit-dog/">Edit</a>
+  <a class="button" href="/mydogs/{{dogs.id}}/edit-dog/">Edit</a>
   {{#each requests}}
-  <a class="btn" href="/mydogs/{{../dogs._id}}/request/{{this._id}}">Request</a>
+    {{this.owner.username}}
+  <a class="button" href="/mydogs/{{../dogs._id}}/request/{{this._id}}">See request</a>
   {{/each}}
 
   {{/if}}
