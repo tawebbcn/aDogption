@@ -129,17 +129,17 @@ router.post('/:dogId/request/:requestId/', (req, res, next) => {
   if (user.role === 'shelter') {
     if (req.body.status === 'reject') {
       Dog.findById(dogId)
+        .populate('requests.owner')
         .then((dog) => {
           for (let i = 0; i < dog.requests.length; i++) {
             if (dog.requests[i]._id.equals(requestId)) {
               dog.requests[i].status = 'rejected';
+              mailer.requestStatus(dog.requests[i].owner.email, dog.name, 'rejected');
             }
           }
-          return dog;
+          return dog.save();
         })
-        .then((dog) => {
-          dog.save();
-          mailer.requestStatus('raphaelmmontenegro@gmail.com', dog.name, 'rejected');
+        .then(() => {
           res.redirect(`/mydogs/${dogId}`);
         })
         .catch(next);
@@ -147,14 +147,15 @@ router.post('/:dogId/request/:requestId/', (req, res, next) => {
     }
     if (req.body.status === 'accept') {
       Dog.findById(dogId)
+        .populate('requests.owner')
         .then((dog) => {
           for (let i = 0; i < dog.requests.length; i++) {
             if (dog.requests[i]._id.equals(requestId)) {
               dog.requests[i].status = 'accepted';
-              mailer.requestStatus('raphaelmmontenegro@gmail.com', dog.name, 'accepted');
+              mailer.requestStatus(dog.requests[i].owner.email, dog.name, 'accepted');
             } else {
               dog.requests[i].status = 'rejected';
-              mailer.requestStatus('jorgetd92@gmail.com', dog.name, 'rejected');
+              mailer.requestStatus(dog.requests[i].owner.email, dog.name, 'rejected');
             }
           }
           return dog;

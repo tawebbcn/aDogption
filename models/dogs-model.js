@@ -31,12 +31,12 @@ const dogSchema = new Schema({
   },
   owner: {
     type: ObjectId,
-    ref: User
+    ref: 'User'
   },
   requests: [{
     owner: {
       type: ObjectId,
-      ref: User,
+      ref: 'User',
       required: true
     },
     message: {

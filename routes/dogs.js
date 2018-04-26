@@ -99,8 +99,9 @@ router.post('/:dogId/request', (req, res, next) => {
   };
 
   Dog.findByIdAndUpdate(dogId, {$push: {requests: requestInfo}})
+    .populate('owner')
     .then((result) => {
-      mailer.newRequest('georgemcoupland@gmail.com', message, result.name);
+      mailer.newRequest(result.owner.email, message, result.name);
       res.redirect(`/dogs/${dogId}`);
     })
     .catch(next);

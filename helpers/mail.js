@@ -12,13 +12,12 @@ const newRequest = function (email, message, dog) {
   });
 
   transporter.sendMail({
-    from: '"Dog House 👻" <doghouse.ironhack@gmail.com>',
+    from: '"Dog House 🐶" <doghouse.ironhack@gmail.com>',
     to: email,
     subject: `You have a new request for ${dog}`,
     text: message,
     html: `<b>${message}</b>` // We need to see how this part works
   })
-    .then(info => res.render('message', { email, subject, message, info }))
     .catch(error => console.log(error));
 };
 
@@ -39,13 +38,12 @@ const requestStatus = function (email, dog, status) {
   });
 
   transporter.sendMail({
-    from: '"Dog House 👻" <doghouse.ironhack@gmail.com>',
+    from: '"Dog House 🐶" <doghouse.ironhack@gmail.com>',
     to: email,
     subject: `Your request for ${dog} has been answered`,
     text: message(status),
     html: `<b>${message(status)}</b>` // We need to see how this part works
   })
-    .then(info => res.render('message', { email, subject, message, info }))
     .catch(error => console.log(error));
 };
 
