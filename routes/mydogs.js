@@ -4,6 +4,8 @@ const express = require('express');
 const Dog = require('../models/dogs-model');
 const router = express.Router();
 const mongoose = require('mongoose');
+const nodemailer = require('nodemailer');
+const mailer = require('../helpers/mail');
 
 router.get('/', (req, res, next) => {
   const user = req.session.user;
@@ -137,13 +139,33 @@ router.post('/:dogId/request/:requestId/', (req, res, next) => {
         })
         .then((dog) => {
           dog.save();
+          mailer.requestStatus('raphaelmmontenegro@gmail.com', dog.name, 'rejected');
           res.redirect(`/mydogs/${dogId}`);
         })
         .catch(next);
       return;
     }
     if (req.body.status === 'accept') {
+      Dog.findById(dogId)
+        .then((dog) => {
+          for (let i = 0; i < dog.requests.length; i++) {
+            if (dog.requests[i]._id.equals(requestId)) {
+              dog.requests[i].status = 'accepted';
+              mailer.requestStatus('raphaelmmontenegro@gmail.com', dog.name, 'accepted');
+            } else {
+              dog.requests[i].status = 'rejected';
+              mailer.requestStatus('jorgetd92@gmail.com', dog.name, 'rejected');
+            }
+          }
+          return dog;
+        })
+        .then((dog) => {
+          dog.save();
 
+          res.redirect(`/mydogs/${dogId}`);
+        })
+        .catch(next);
+      return;
     }
   }
   res.redirect('/dogs');

@@ -4,6 +4,8 @@ const express = require('express');
 const Dog = require('../models/dogs-model');
 const router = express.Router();
 const mongoose = require('mongoose');
+const nodemailer = require('nodemailer');
+const mailer = require('../helpers/mail');
 
 router.get('/', (req, res, next) => {
   Dog.find({})
@@ -98,6 +100,7 @@ router.post('/:dogId/request', (req, res, next) => {
 
   Dog.findByIdAndUpdate(dogId, {$push: {requests: requestInfo}})
     .then((result) => {
+      mailer.newRequest('georgemcoupland@gmail.com', message, result.name);
       res.redirect(`/dogs/${dogId}`);
     })
     .catch(next);
