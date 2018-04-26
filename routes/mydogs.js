@@ -126,11 +126,17 @@ router.post('/:dogId/request/:requestId/', (req, res, next) => {
 
   if (user.role === 'shelter') {
     if (req.body.status === 'reject') {
-      Dog.findByIdAndUpdate({dogId, requestId}, {
-        $push: {
-          try: 'kn'
-        }})
-        .then((result) => {
+      Dog.findById(dogId)
+        .then((dog) => {
+          for (let i = 0; i < dog.requests.length; i++) {
+            if (dog.requests[i]._id.equals(requestId)) {
+              dog.requests[i].status = 'rejected';
+            }
+          }
+          return dog;
+        })
+        .then((dog) => {
+          dog.save();
           res.redirect(`/mydogs/${dogId}`);
         })
         .catch(next);
