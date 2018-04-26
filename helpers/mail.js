@@ -14,9 +14,9 @@ const newRequest = function (email, message, dog) {
   transporter.sendMail({
     from: '"Dog House 🐶" <doghouse.ironhack@gmail.com>',
     to: email,
-    subject: `You have a new request for ${dog}`,
+    subject: `You have a new request for ${dog.name}`,
     text: message,
-    html: `<b>${message}</b>` // We need to see how this part works
+    html: `<a href="${process.env.APP_URL}mydogs/${dog._id}">Click here</a>` // <a href="localhost/dogs/request/${}/accept" // We need to see how this part works
   })
     .catch(error => console.log(error));
 };

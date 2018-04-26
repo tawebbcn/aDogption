@@ -18,7 +18,9 @@
             <label>Send a nice message to the shelter</label>
             <textarea name="message" cols="30" rows="10"></textarea>
         </div>
-
+        <div class="field" >
+            <input type="hidden" value='{{process.env.APP_URL}}{{dogId}}'>
+        </div>
         <div class="field submit">
             <button type="submit">Save</button>
         </div>
