@@ -98,9 +98,11 @@ router.get('/:dogId/request/:requestId', (req, res, next) => {
   const requestId = req.params.requestId;
   let requests = null;
   const user = req.session.user;
+  let pending = true;
 
   if (user.role === 'shelter') {
     Dog.findById(dogId)
+      .populate('requests.owner')
       .then((result) => {
         result.requests.find((request) => {
           if (request.id === requestId) {
@@ -108,11 +110,15 @@ router.get('/:dogId/request/:requestId', (req, res, next) => {
             requests = result.requests[index];
           };
         });
-
+        if (requests.status !== 'pending') {
+          pending = false;
+        }
         const data = {
           dogs: result,
-          requests: requests
+          requests: requests,
+          pending: pending
         };
+
         res.render('view-request', data);
       })
       .catch(next);

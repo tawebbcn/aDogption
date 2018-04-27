@@ -1,10 +1,15 @@
-{{requests.owner}}
-{{requests.message}}
-{{requests.status}}
+<div class="container">
+<h1>{{dogs.name}}</h1>
+<h2>{{requests.owner.username}}</h2>
+<h3>{{requests.message}}</h3>
+<p>{{requests.status}}</p>
 
+{{#if pending}}
 <form method="POST" action="/mydogs/{{dogs.id}}/request/{{requests.id}}">
     <div class="field submit">
         <button class="btn" type="submit" name="status" value="accept">Accept</button>
         <button class="btn" type="submit" name="status" value="reject">Reject</button>
     </div>
+    </div>
 </form>
+{{/if}}
