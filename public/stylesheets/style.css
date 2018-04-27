@@ -2,6 +2,7 @@
 
 html {
   box-sizing: border-box;
+  height: 100%;
 }
 *, *:before, *:after {
   box-sizing: inherit;
@@ -10,6 +11,7 @@ html {
 body {
   margin: 0;
   padding: 0;
+  height: 100%;
 }
 
 
@@ -39,6 +41,7 @@ h3 {
 
 h4 {
   font-weight: lighter;
+  line-height: 80%;
 }
 
 p {
@@ -53,12 +56,15 @@ body {
   background: #ffc300;
   color: #fff;
 }
-
+.site-main {
+  flex-grow: 1;
+}
 #site-header {
   padding: 30px 0;
   color: #ffc300;
   background: #fff;
   background-size: cover;
+
 }
 
 .logo h1{
@@ -84,6 +90,7 @@ button {
 }
 .home-image img{
   height: 50vh;
+  border-radius: 10px;
 }
 
 #site-footer {
@@ -91,10 +98,6 @@ button {
   background: #fff;
   background-size: cover;
   padding: 30px 0;
-}
-
-#site-main {
-  margin-bottom: 80vh;
 }
 
 .container {
@@ -125,6 +128,7 @@ button {
    background-color: #27afdc;
    border-radius: 10px;
    width:25vh;
+   min-width: 200px;
 }
 
 .dog-card a:hover {
@@ -142,8 +146,7 @@ button {
   text-align: left;
 }
 .add-dog {
-  padding-top: 5vh;
-  margin-bottom: 5vh;
+  margin-bottom: 20px;
   align-self: baseline;
 }
 
