@@ -10,6 +10,7 @@ const logger = require('morgan');
 const mongoose = require('mongoose');
 const flash = require('connect-flash');
 const session = require('express-session');
+const favicon = require('serve-favicon');
 const MongoStore = require('connect-mongo')(session);
 
 // --------------------Set up routes--------------//
@@ -52,6 +53,7 @@ app.use(function (req, res, next) {
 
 // -------------------Middlewares--------------- //
 app.use(logger('dev'));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

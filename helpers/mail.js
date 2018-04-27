@@ -16,7 +16,7 @@ const newRequest = function (email, message, dog) {
     to: email,
     subject: `You have a new request for ${dog.name}`,
     text: message,
-    html: `<a href="${process.env.APP_URL}mydogs/${dog._id}">Click here</a>`
+    html: `<p>There is a new request for  ${dog.name}.</p><a href="${process.env.APP_URL}mydogs/${dog._id}">Click here to check it out.</a>`
   })
     .catch(error => console.log(error));
 };
