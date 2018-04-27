@@ -2,11 +2,14 @@
 
     {{#each dogs}}
     <div class="dog-card">
-        <h1>{{this.name}}</h1>
-        <h4>{{this.gender}}</h4>
-        <h4>{{this.breed_type}}</h4>
-        <h4>{{this.age}}</h4>
-        <a href="/mydogs/{{this.id}}" class="button">See more details</a>
+        <div class="dog-description">
+            <img src="{{this.picture}}">
+            <h1>{{this.name}}</h1>
+            <h4>Gender: <strong>{{this.gender}}</strong></h4>
+            <h4>Type: <strong>{{this.breed_type}}</strong></h4>
+            <h4>Age: <strong>{{this.age}}</strong></h4>
+        </div>
+        <a href="/mydogs/{{this.id}}" class="more-info"><strong>See More</strong></a>
     </div>
     {{/each}}
 <div class="add-dog">   

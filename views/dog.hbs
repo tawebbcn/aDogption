@@ -1,10 +1,11 @@
 <div class="container">
   <div class="dog-card">
-    <h3>{{dogs.name}}</h3>
-    <h4>{{dogs.gender}}</h4>
-    <h4>{{dogs.breed_type}}</h4>
-    <h4>{{dogs.age}}</h4>
-    <h4>{{dogs.city}}</h4>
+    <img src="{{this.picture}}">
+    <h3>Name: <strong>{{dogs.name}}</strong></h3>
+    <h4>Gender: <strong>{{dogs.gender}}</strong></h4>
+    <h4>Type: <strong>{{dogs.breed_type}}</strong></h4>
+    <h4>Age: <strong>{{dogs.age}}</strong></h4>
+    <h4>City: <strong>{{dogs.city}}</strong></h4>
     <p>{{dogs.description}}</p>
   </div>
 
@@ -31,7 +32,7 @@
   {{/if}}
   {{#unless status}}
   {{#unless shelter}}
-  <a href="/dogs/{{dogs.id}}/request">Send a request</a>
+  <a href="/dogs/{{dogs.id}}/request" class="button request">Send a request</a>
   {{/unless}}
   {{/unless}}
 

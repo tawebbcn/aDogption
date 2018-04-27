@@ -37,6 +37,10 @@ h3 {
   font-size: 20px;
 }
 
+h4 {
+  font-weight: lighter;
+}
+
 p {
   margin: 0 0 12px;
 }
@@ -57,6 +61,11 @@ body {
   background-size: cover;
 }
 
+.logo h1{
+  font-size: 45px;
+  color: #27afdc;
+  text-shadow: 1px 1px 0  #111;
+}
 #site-header form{
   display: inline-block;
 
@@ -68,7 +77,11 @@ button {
   padding: 10px 16px;
   color: #fff;
 }
+/* ------------------Homepage style----------------- */
 
+.home-info {
+  text-align: center;
+}
 .home-image img{
   height: 50vh;
 }
@@ -98,18 +111,36 @@ button {
    flex-direction: row;
    flex-wrap: wrap;
    justify-content: space-between;
-   align-content: flex-start;
-   align-items: flex-start;
+   /* align-content: flex-start; */
+   align-items: center;
 }
 
 .dog-card {
    order: 0;
    flex: 0 1 auto;
    align-self: auto;
-   padding-left: 10px;
+   padding: 15px;
    margin-bottom: 20px;
+   line-height: 100%; 
+   background-color: #27afdc;
+   border-radius: 10px;
+   width:25vh;
 }
 
+.dog-card a:hover {
+  color: black;
+}
+
+.dog-card img {
+  height: 20vh;
+  width: 100%;
+  display: block;
+  border-radius: 10px;  
+}
+
+.dog-description {
+  text-align: left;
+}
 .add-dog {
   padding-top: 5vh;
   margin-bottom: 5vh;
@@ -120,7 +151,10 @@ button {
 
 /* ----------------------/:dogId----------------- */
 
-
+.request {
+  width: 25vh;
+  text-align: center;
+}
 @media (min-width: 768px) {
   .container {
     max-width: 728px;
@@ -143,9 +177,39 @@ a.button {
   border-radius: 10px;
   color: #fff;
   padding: 10px;
-  margin-bottom: 600px;
+  margin-bottom: 10px;
   display: inline-block;
 }
+
+input {
+  width: 100%;
+  border-radius: 10px;
+  border: none;
+}
+.checkbox {
+  width: 15px;
+}
+select {
+  width: 50%;
+  height: 30px;
+  border: none;
+  font-size: 16px;
+}
+textarea {
+  width: 100%;
+  resize: none;
+  border-radius: 10px;
+  border: none;
+}
+.more-info {
+  border-radius: 10px;
+  color: #fff;
+  padding-top: 10px;
+  display: inline-block;
+  text-align: center;
+  
+}
+
 .signup,
 .login  {
   display: inline-block;
@@ -169,6 +233,7 @@ a.button {
 /* ---- site-header ---- */
 #site-header {
   overflow: hidden;
+  margin-bottom: 20px;
 }
 
 #site-header .logo {
@@ -176,6 +241,9 @@ a.button {
   margin: 0;
 }
 
+.username {
+  font-size: 20px;
+}
 
 /* ---- site-header ---- */
 
@@ -224,6 +292,10 @@ form .field {
 	margin-bottom: 20px;
 }
 
+.role {
+  display: inline-block;
+  padding: 10px;
+}
 form label {
 	display: block;
 	margin-bottom: 10px;

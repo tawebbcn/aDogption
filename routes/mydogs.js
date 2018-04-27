@@ -6,6 +6,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
 const mailer = require('../helpers/mail');
+const randomPic = require('../helpers/pictures');
 
 router.get('/', (req, res, next) => {
   const user = req.session.user;
@@ -33,24 +34,25 @@ router.get('/add-dog', (req, res, next) => {
   }
   res.redirect('/dogs');
 });
-// })
-;
 
 router.post('/add-dog', (req, res, next) => {
   const user = req.session.user;
 
-  if (user.role === 'shelter') {
-    const owner = req.session.user._id;
-    const dog = new Dog(req.body);
-    dog.owner = owner;
-
-    dog.save()
-      .then((result) => {
-        res.redirect('/mydogs');
-      });
+  if (user.role !== 'shelter') {
+    res.redirect('/dogs');
     return;
   }
-  res.redirect('/dogs');
+
+  const owner = req.session.user._id;
+  const dog = new Dog(req.body);
+  dog.picture = randomPic();
+  dog.owner = owner;
+
+  dog.save()
+    .then((result) => {
+      res.redirect('/mydogs');
+    })
+    .catch(next);
 });
 
 router.get('/:dogId', (req, res, next) => {

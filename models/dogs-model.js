@@ -10,6 +10,10 @@ const dogSchema = new Schema({
     type: String,
     required: true
   },
+  picture: {
+    type: String,
+    required: true
+  },
   gender: {
     type: String,
     enum: ['male', 'female'],
