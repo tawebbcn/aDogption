@@ -3,7 +3,7 @@ Dogs for people looking for dogs and home for dogs looking for a home
 
 
 ## ROUTES:
-
+````
 / - The homepage
 GET /auth/login
 POST /auth/login
@@ -18,9 +18,11 @@ GET => /mydogs/:id => GET/POST
 GET => mydogs/add => POST
 
 * GET => /preferences => POST
+````
 
 ## MODELS
 
+````
 dogs {
   name: {
     type: String,
@@ -53,7 +55,9 @@ dogs {
          }****
       }]
       }
+      ````
       
+      ````
 users {
   name: {
     type: String,
@@ -82,6 +86,7 @@ users {
         required: true
       }
 }
+````
 
 ## USER STORIES (TO BE CONTINUED):
   
